@@ -7,7 +7,7 @@ class TStack {
   T data[size];
   int top;
 public:
-  Tstack() {
+  TStack() {
     top = 0;
   }
   void Push(const T& item) {
