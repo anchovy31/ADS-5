@@ -1,10 +1,9 @@
 // Copyright 2021 NNTU-CS
-#include <string>
 #include <math.h>
 #include <map>
 #include "tstack.h"
 
-int ToInt(std::string& str) {
+int ToInt(const std::string& str) {
   int size = str.size();
   int res = 0;
   for (int i = 0; str[i]; i++) {
@@ -13,7 +12,7 @@ int ToInt(std::string& str) {
   }
   return res;
 }
-int Operation(int num1,int num2, char sym) {
+int Operation(int num1, int num2, char sym) {
   switch (sym) {
   case '+':
     return num1 + num2;
@@ -31,26 +30,26 @@ int Priority(char sym) {
     return 0;
   else if (sym == ')')
     return 1;
-  else if (sym == '+' or sym == '-')
+  else if (sym == '+' || sym == '-')
     return 2;
-  else if (sym == '/' or sym == '*')
+  else if (sym == '/' || sym == '*')
     return 3;
   else
     return -1;
 }
 std::string infx2pstfx(std::string inf) {
   bool flag = 0;
-  TStack<char,100> stack;
+  TStack<char, 100> stack;
   std::string pref;
   int prior = 0;
   for (int i = 0; inf[i]; i++) {
-    if (inf[i] >= '0' and inf[i] <= '9') {
+    if (inf[i] >= '0' && inf[i] <= '9') {
       pref += inf[i];
-      if (inf[i+1] < '0' or inf[i+1] > '9') {
+      if (inf[i+1] < '0' || inf[i+1] > '9') {
         pref += ' ';
       }
       flag = 1;
-    } else if (inf[i]!='\0') {
+    } else if (inf[i] != '\0') {
       prior = Priority(inf[i]);
       if (inf[i] == ')') {
         while (stack.ViewTop() != '(') {
@@ -58,7 +57,8 @@ std::string infx2pstfx(std::string inf) {
           pref += ' ';
         }
         stack.Pop();
-      } else if (prior == 0 or prior > Priority(stack.ViewTop()) or stack.ViewTop() == -1) {
+      } else if (prior == 0 || prior > Priority(stack.ViewTop())
+        || stack.ViewTop() == -1) {
         stack.Push(inf[i]);
       } else if (Priority(stack.ViewTop()) >= prior) {
           while (Priority(stack.ViewTop()) >= prior) {
@@ -78,11 +78,11 @@ std::string infx2pstfx(std::string inf) {
 }
 int eval(std::string pref) {
   std::string fake;
-  int num1 = 0, num2=0;
+  int num1 = 0, num2 = 0;
   TStack<int, 100> stack;
   for (int i = 0; pref[i]; i++) {
-    if (pref[i] >= '0' and pref[i] <= '9') {
-      while (pref[i] >= '0' and pref[i] <= '9') {
+    if (pref[i] >= '0' && pref[i] <= '9') {
+      while (pref[i] >= '0' && pref[i] <= '9') {
         fake += pref[i++];
       }
       stack.Push(ToInt(fake));
@@ -92,7 +92,7 @@ int eval(std::string pref) {
     } else {
       num1 = stack.Pop();
       num2 = stack.Pop();
-      stack.Push(Operation(num2,num1,pref[i]));
+      stack.Push(Operation(num2, num1, pref[i]));
     }
   }
   return stack.Pop();
