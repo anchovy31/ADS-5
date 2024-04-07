@@ -14,13 +14,13 @@ public:
     if (top <= size - 1)
       data[top++] = item;
     else
-      throw string("Full!");
+      throw std::string("Full!");
   }
   T Pop() {
     if (top > 0)
       return data[--top];
     else
-      throw string("Empty!");
+      throw std::string("Empty!");
   }
   T ViewTop() {
     if (top > 0)
