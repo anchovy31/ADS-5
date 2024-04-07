@@ -4,7 +4,7 @@
 #include <map>
 #include "tstack.h"
 
-int ToInt(string& str) {
+int ToInt(std::string& str) {
   int size = str.size();
   int res = 0;
   for (int i = 0; str[i]; i++) {
@@ -37,10 +37,10 @@ int Priority(char sym) {
   else
     return -1;
 }
-string infx2pstfx(string inf) {
+std::string infx2pstfx(std::string inf) {
   bool flag = 0;
   TStack<char,100> stack;
-  string pref;
+  std::string pref;
   int prior = 0;
   for (int i = 0; inf[i]; i++) {
     if (inf[i] >= '0' and inf[i] <= '9') {
@@ -72,8 +72,8 @@ string infx2pstfx(string inf) {
   }
   return pref;
 }
-int eval(string pref) {
-  string fake;
+int eval(std::string pref) {
+  std::string fake;
   int num1 = 0, num2=0;
   TStack<int, 100> stack;
   for (int i = 0; pref[i]; i++) {
