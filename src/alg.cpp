@@ -14,7 +14,7 @@ int ToInt(std::string& str) {
   return res;
 }
 int Operation(int num1,int num2, char sym) {
-	switch (sym) {
+  switch (sym) {
   case '+':
     return num1 + num2;
   case '-':
