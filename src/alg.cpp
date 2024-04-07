@@ -24,6 +24,7 @@ int Operation(int num1,int num2, char sym) {
   case '/':
     return num1 / num2;
   }
+  return 0;
 }
 int Priority(char sym) {
   if (sym == '(')
