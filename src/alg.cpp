@@ -60,17 +60,20 @@ std::string infx2pstfx(std::string inf) {
         stack.Pop();
       } else if (prior == 0 or prior > Priority(stack.ViewTop()) or stack.ViewTop() == -1) {
         stack.Push(inf[i]);
-      } else if (Priority(stack.ViewTop()>=prior)) {
-        while (Priority(stack.ViewTop() >= prior)) {
-          pref += stack.Pop();
-        }
-        Priority(stack.ViewTop() >= prior);
+      } else if (Priority(stack.ViewTop()) >= prior) {
+          while (Priority(stack.ViewTop()) >= prior) {
+              pref += stack.Pop();
+          }
+          pref += ' ';
+          stack.Push(inf[i]);
       }
     }
   }
   while (stack.ViewTop() != -1) {
     pref += stack.Pop();
+    pref += ' ';
   }
+  pref.pop_back();
   return pref;
 }
 int eval(std::string pref) {
