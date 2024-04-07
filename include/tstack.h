@@ -19,7 +19,14 @@ public:
   T Pop() {
     if (top > 0)
       return data[--top];
-    else throw string("Empty!");
+    else
+      throw string("Empty!");
+  }
+  T ViewTop() {
+    if (top > 0)
+      return data[top-1];
+    else
+      return -1;
   }
 };
 #endif  // INCLUDE_TSTACK_H_
