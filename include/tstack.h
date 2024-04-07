@@ -2,9 +2,9 @@
 #ifndef INCLUDE_TSTACK_H_
 #define INCLUDE_TSTACK_H_
 #include <string>
-template<typename T,const int size>
+template<typename T, const int size>
 class TStack {
-  T data[size];
+  T data[100];
   int top;
 
  public:
